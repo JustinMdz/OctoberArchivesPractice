@@ -5,9 +5,9 @@ FileManager::FileManager() {}
 void FileManager::save(string* stringsInLineToSave, string fileName, int stringsInLine)
 {
 	try {
-		ofstream ouputArchive(fileName, ios::app);//guardas cosas sin sobreescribirlas->ofstream ouputArchive(fileName, ios::app);
+		ofstream ouputArchive(fileName,ios::app);//guardas cosas sin sobreescribirlas->ofstream ouputArchive(fileName, ios::app);
 		for (int index = 0; index < stringsInLine; index++) {
-			ouputArchive << stringsInLineToSave[index] << " ";
+			ouputArchive << stringsInLineToSave[index] << ",";
 		}
 		ouputArchive << endl;
 		ouputArchive.close();
@@ -19,29 +19,32 @@ void FileManager::save(string* stringsInLineToSave, string fileName, int strings
 	}
 }
 
-string* FileManager::load(string& fileName, int linesToRead)
+string* FileManager::load(const string& fileName, int linesToRead)
 {
 	try {
-		string* linesToInput;
+		string* linesToInput = new string[linesToRead];
 		ifstream inputArchive(fileName);
 
-		linesToInput = new string[linesToRead];
+		if (!inputArchive.is_open()) {
+			throw runtime_error("No se pudo abrir el archivo.");
+		}
+
 		string line;
-		int index = 0;
-		while (getline(inputArchive, line)) {
-			linesToInput[index] = line;
-			index++;
+		int linesRead = 0;
+
+		while (linesRead < linesToRead && getline(inputArchive, line)) {
+			linesToInput[linesRead] = line;
+			linesRead++;
 		}
 
 		inputArchive.close();
-
 		return linesToInput;
 	}
 	catch (const exception& exception) {
 		cerr << "Error al cargar el archivo de lectura: " << exception.what() << endl;
 	}
 
-	return nullptr;  // Return nullptr in case of an error
+	return nullptr;  // Retorna nullptr en caso de error
 }
 
 int FileManager::getLineToRead(string& filename)

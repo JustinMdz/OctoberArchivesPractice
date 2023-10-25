@@ -9,7 +9,7 @@ class RandomNumbers
 private:
 	int** matrix;
 	int rows;
-	int colummns;
+	int columns;
 
 public:
 	RandomNumbers(int,int);
