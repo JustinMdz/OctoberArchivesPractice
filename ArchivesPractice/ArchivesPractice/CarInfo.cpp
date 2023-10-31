@@ -41,7 +41,7 @@ void CarInfo::saveCar(FileManager* manager)
 	carLine[10] = to_string(price);
 	carLine[11] = to_string(mileAge);
 
-	//manager->save(carLine, fileName, carAttributtes);
+	manager->save(fileName, carLine, carAttributtes);
 }
 
 void CarInfo::print()

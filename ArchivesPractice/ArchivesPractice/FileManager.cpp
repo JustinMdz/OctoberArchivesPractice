@@ -50,7 +50,6 @@ string* FileManager::load(string& fileName)
 		int index = 0;
 		while (getline(inputArchive, line)) {
 			data[index] = line;
-			cout << data[index];
 			index++;
 		}
 		return data;

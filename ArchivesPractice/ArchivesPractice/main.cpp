@@ -9,48 +9,24 @@ int main() {
 
 	FileManager* fileManager = new FileManager();
 
-	//parte carros
+	//parte personas
+	int personNumb = 3;
+	Person* persons = new Person[personNumb];
 
-	CarInfo* cars[3];
+	Person aux;
 
-	cars[0] = (new CarInfo("Toyota", "BRZ", "BLACK", "GOOD", "WRD", "SUPER",
-		2, 4, 2018, 65000, 12500, 85000));
-	cars[1] = (new CarInfo("Mazda", "RX-8", "WHITE", "BAD", "AWD", "DIESEL",
-		2, 2, 1990, 35000, 85000, 60000));
-	cars[2] = (new CarInfo("NISSAN", "GTR-R35", "BLUE", "EXCELENT", "FWD", "SUPER",
-		2, 2, 2020, 70000, 25000, 180000));
+	persons[0] = Person("Justin", "Mendez", "H", 18);
+	persons[1] = Person("Juan", "Meca", "T", 18);
+	persons[2] = Person("Keyla", "Lopez", "M", 18);
 
-	for (int index = 0; index < 3; index++) {
-		cars[index]->print();
+	aux.savePersons(fileManager, persons, personNumb);
+
+	Person* newPersons = aux.loadPersons(fileManager,personNumb);
+
+	for (int index = 0; index < personNumb; index++) {
+		newPersons[index].print();
+		persons[index].print();
 	}
-	cars[0]->saveCar(fileManager);
-	cars[1]->saveCar(fileManager);
-	cars[2]->saveCar(fileManager);
-
-
-	// parte personas
-	//Person* persons[3];
-	//Person* newPersons[3];
-
-	//persons[0] = new Person("Justin", "Mendez", "H", 18);
-	//persons[1] = new Person("David", "Castro", "T", 18);
-	//persons[2] = new Person("Keyla", "Lopez", "M", 18);
-
-	//for (int index = 0; index < 3; index++) {
-	//	persons[index]->print();
-	//}
-
-	//persons[0]->savePerson(fileManager);
-	//persons[1]->savePerson(fileManager);
-	//persons[2]->savePerson(fileManager);
-
-
-	//for (int index = 0; index < 3; index++) {
-	//	newPersons[index]->loadPerson(fileManager);
-	//	//newPersons[index]->print();
-	//}
-
-	//cout << newPersons[0];
 
 
 		/*parte de la matrix*/
@@ -67,6 +43,26 @@ int main() {
 	matrixToChargue->print();
 	delete randomMatrix;
 	delete matrixToChargue;*/
+	////parte carros
+
+	//CarInfo* cars[3];
+
+	//cars[0] = (new CarInfo("Toyota", "BRZ", "BLACK", "GOOD", "WRD", "SUPER",
+	//	2, 4, 2018, 65000, 12500, 85000));
+	//cars[1] = (new CarInfo("Mazda", "RX-8", "WHITE", "BAD", "AWD", "DIESEL",
+	//	2, 2, 1990, 35000, 85000, 60000));
+	//cars[2] = (new CarInfo("NISSAN", "GTR-R35", "BLUE", "EXCELENT", "FWD", "SUPER",
+	//	2, 2, 2020, 70000, 25000, 180000));
+
+	//for (int index = 0; index < 3; index++) {
+	//	cars[index]->print();
+	//}
+	//cars[0]->saveCar(fileManager);
+	//cars[1]->saveCar(fileManager);
+	//cars[2]->saveCar(fileManager);
+
+
+
 	delete fileManager;
 	return 0;
 }
