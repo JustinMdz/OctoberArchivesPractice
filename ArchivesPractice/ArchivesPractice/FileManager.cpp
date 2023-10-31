@@ -2,66 +2,61 @@
 
 FileManager::FileManager() {}
 
-void FileManager::save(string* stringsInLineToSave, string fileName, int stringsInLine)
-{
+void FileManager::save(string& fileName, string* dataLines, int lines) {
 	try {
-		ofstream ouputArchive(fileName,ios::app);//guardas cosas sin sobreescribirlas->ofstream ouputArchive(fileName, ios::app);
-		for (int index = 0; index < stringsInLine; index++) {
-			ouputArchive << stringsInLineToSave[index] << ",";
-		}
-		ouputArchive << endl;
-		ouputArchive.close();
-		cout << "Datos esctritos adecuadamente." << endl;
-	}
-
-	catch (const exception& exception) {
-		cerr << "Error al cargar el archivo de escritura" << exception.what() << endl;
-	}
-}
-
-string* FileManager::load(const string& fileName, int linesToRead)
-{
-	try {
-		string* linesToInput = new string[linesToRead];
-		ifstream inputArchive(fileName);
-
-		if (!inputArchive.is_open()) {
-			throw runtime_error("No se pudo abrir el archivo.");
+		ofstream ouputArchive(fileName);
+		if (!ouputArchive.is_open()) {
+			throw runtime_error("Error al abrir el archivo para escritura");
 		}
 
-		string line;
-		int linesRead = 0;
-
-		while (linesRead < linesToRead && getline(inputArchive, line)) {
-			linesToInput[linesRead] = line;
-			linesRead++;
+		for (int indexDataPerLine = 0; indexDataPerLine < lines; indexDataPerLine++) {
+			ouputArchive << dataLines[indexDataPerLine] << ";" << endl;
 		}
-
-		inputArchive.close();
-		return linesToInput;
-	}
-	catch (const exception& exception) {
-		cerr << "Error al cargar el archivo de lectura: " << exception.what() << endl;
-	}
-
-	return nullptr;  // Retorna nullptr en caso de error
-}
-
-int FileManager::getLineToRead(string& filename)
-{
-	int countLines = 0;
-	try {
-		ifstream inputArchive(filename);
-		string line;
-		while (getline(inputArchive, line)) {
-			countLines++;
-		}
-		inputArchive.close();
-		cout << "Lineas contadas con exito: ";
-		return countLines;
 	}
 	catch (const exception& ex) {
-		cerr << "Error al cargar el archivo de lectura: " << ex.what() << endl;
-		return countLines = 0;
+		cerr << "Excepción atrapada: " << ex.what() << endl;
 	}
+}
+
+int FileManager::countLines(string& fileName)
+{
+	try {
+		ifstream inputArchive(fileName);
+		if (!inputArchive.is_open()) {
+			throw runtime_error("Error al abrir el archivo de lectura");
+		}
+		int lines = 0;
+		string line;
+		while (getline(inputArchive, line)) {
+			lines++;
+		}
+		return lines;
+	}
+	catch (const exception& ex) {
+		cerr << "Excepción atrapada: " << ex.what() << endl;
+	}
+	return 0;
+}
+
+string* FileManager::load(string& fileName)
+{
+	try {
+		ifstream inputArchive(fileName);
+		if (!inputArchive.is_open()) {
+			throw runtime_error("Error al abrir el archivo de lectura");
+		}
+		string* data = new string[countLines(fileName)];
+		string line;
+		int index = 0;
+		while (getline(inputArchive, line)) {
+			data[index] = line;
+			cout << data[index];
+			index++;
+		}
+		return data;
+	}
+	catch (const exception& ex) {
+		cerr << "Excepción atrapada: " << ex.what() << endl;
+	}
+	return nullptr;
 }

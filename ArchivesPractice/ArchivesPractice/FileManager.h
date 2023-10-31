@@ -11,7 +11,7 @@ private:
 
 public:
 	FileManager();
-	void save(string*,string,int);
-	string* load(const string&,int);
-	int getLineToRead(string&);
+	void save(string&,string*,int);
+	int countLines(string&);
+	string* load(string&);
 };

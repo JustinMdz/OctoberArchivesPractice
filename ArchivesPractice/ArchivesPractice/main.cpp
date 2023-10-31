@@ -4,8 +4,6 @@
 #include "Person.h"
 #include"CarInfo.h"
 using namespace std;
-const static int ROWS = 3;
-const static int COLUMMNS = 3;
 
 int main() {
 
@@ -16,7 +14,7 @@ int main() {
 	CarInfo* cars[3];
 
 	cars[0] = (new CarInfo("Toyota", "BRZ", "BLACK", "GOOD", "WRD", "SUPER",
-		2,4,2018,65000,12500,85000));
+		2, 4, 2018, 65000, 12500, 85000));
 	cars[1] = (new CarInfo("Mazda", "RX-8", "WHITE", "BAD", "AWD", "DIESEL",
 		2, 2, 1990, 35000, 85000, 60000));
 	cars[2] = (new CarInfo("NISSAN", "GTR-R35", "BLUE", "EXCELENT", "FWD", "SUPER",
@@ -28,8 +26,6 @@ int main() {
 	cars[0]->saveCar(fileManager);
 	cars[1]->saveCar(fileManager);
 	cars[2]->saveCar(fileManager);
-
-
 
 
 	// parte personas
@@ -57,20 +53,20 @@ int main() {
 	//cout << newPersons[0];
 
 
-	//parte de la matrix
+		/*parte de la matrix*/
 
-	//RandomNumbers* randomMatrix = new RandomNumbers(ROWS,COLUMMNS);
-	//RandomNumbers* matrixToChargue = new RandomNumbers(ROWS, COLUMMNS);
-	//randomMatrix->fillWithRandomNumbers();
+	/*RandomNumbers* randomMatrix = new RandomNumbers(ROWS, COLUMMNS);
+	RandomNumbers* matrixToChargue = new RandomNumbers(ROWS, COLUMMNS);
+	randomMatrix->fillWithRandomNumbers();
 
-	//randomMatrix->print();
-	//matrixToChargue->print();
-	////randomMatrix->saveMatrix(fileManager);
-
-	//matrixToChargue->loadMatrix(fileManager);
-	//cout << "Deberia ser la misma monda"<<endl<<endl;
-	//matrixToChargue->print();
-
+	randomMatrix->print();
+	matrixToChargue->print();
+	randomMatrix->saveMatrix(fileManager);
+	matrixToChargue->loadMatrix(fileManager);
+	cout << "La otra:" << endl;
+	matrixToChargue->print();
+	delete randomMatrix;
+	delete matrixToChargue;*/
 	delete fileManager;
 	return 0;
 }

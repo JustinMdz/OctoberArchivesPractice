@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <sstream>
 #include "FileManager.h"
 
 class RandomNumbers
